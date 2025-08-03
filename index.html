@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ฟอร์มขอเบิกเงินสดย่อย - La canal Café</title>
+  <title>ฟอร์มขอเบิกเงินสดย่อย (Petty Cash) - La canal Café</title>
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
@@ -84,81 +84,47 @@
     <label for="amount">💰 จำนวนเงิน (บาท)</label>
     <input type="number" id="amount" name="amount" required />
 
-    <label for="slip">📎 สลิปโอนเงิน (jpg/png, max 5MB)</label>
-    <input type="file" id="slip" accept="image/png,image/jpeg" required />
-    <div id="slipPreview"></div>
-
-    <label for="receipt">🧾 บิลใบเสร็จ (jpg/png, max 5MB)</label>
-    <input type="file" id="receipt" accept="image/png,image/jpeg" required />
-    <div id="receiptPreview"></div>
-
-    <label for="po">📄 แนบใบสั่งซื้อ (PO) (PDF)</label>
-    <input type="file" id="po" accept="application/pdf" required />
-
     <div id="loading">🚀 กำลังส่งข้อมูล...</div>
     <button type="submit">📤 ส่งฟอร์ม</button>
   </form>
 
   <script>
     const form = document.getElementById('pettyCashForm');
-    const endpoint = 'https://script.google.com/macros/s/AKfycbyWRC8IWymAE8bF3oyFt_XhTOszduVTr5P7irilDxuVHDDHI63m-btqb6aHOiddR0Ji/exec';
-
-    function previewImage(inputId, previewDivId) {
-      const file = document.getElementById(inputId).files[0];
-      if (file && file.size <= 5 * 1024 * 1024) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          document.getElementById(previewDivId).innerHTML = `<img src="${e.target.result}" style="width:100%; margin-bottom: 1rem; border-radius:8px;" />`;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    document.getElementById('slip').addEventListener('change', () => previewImage('slip', 'slipPreview'));
-    document.getElementById('receipt').addEventListener('change', () => previewImage('receipt', 'receiptPreview'));
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       document.getElementById('loading').style.display = 'block';
 
       try {
-        const toBase64 = (file) =>
-          new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file);
-          });
-
+        const formData = new FormData(form);
         const payload = {
-          name: document.getElementById('name').value,
-          description: document.getElementById('description').value,
-          date: document.getElementById('date').value,
-          amount: document.getElementById('amount').value,
-          slip: await toBase64(document.getElementById('slip').files[0]),
-          receipt: await toBase64(document.getElementById('receipt').files[0]),
-          po: await toBase64(document.getElementById('po').files[0])
+          name: formData.get('name'),
+          description: formData.get('description'),
+          date: formData.get('date'),
+          amount: formData.get('amount'),
         };
 
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        const response = await fetch(
+          'https://script.google.com/macros/s/AKfycbyWRC8IWymAE8bF3oyFt_XhTOszduVTr5P7irilDxuVHDDHI63m-btqb6aHOiddR0Ji/exec',
+          {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
-        const result = await res.json();
-
+        const result = await response.json();
         if (result.status === 'success') {
-          Swal.fire('สำเร็จ', 'ส่งข้อมูลเรียบร้อยแล้ว', 'success');
+          Swal.fire('ส่งสำเร็จ!', 'ข้อมูลถูกส่งแล้ว', 'success');
           form.reset();
-          document.getElementById('slipPreview').innerHTML = '';
-          document.getElementById('receiptPreview').innerHTML = '';
         } else {
-          throw new Error(result.message);
+          Swal.fire('เกิดข้อผิดพลาด', result.message, 'error');
         }
-      } catch (err) {
-        Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการส่งข้อมูล', 'error');
-        console.error(err);
+      } catch (error) {
+        Swal.fire('ข้อผิดพลาด', 'ไม่สามารถส่งข้อมูลได้', 'error');
+        console.error(error);
       } finally {
         document.getElementById('loading').style.display = 'none';
       }
