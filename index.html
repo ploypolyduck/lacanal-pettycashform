@@ -1,212 +1,168 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="th">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ฟอร์มขอเบิกเงินสดย่อย - La canal Café</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+      background-color: #f4f1ee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .glass-form {
+      background: #fffaf5;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 16px rgba(153, 129, 112, 0.15);
+      color: #3f3b36;
+      width: 100%;
+      max-width: 600px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+    label {
+      font-weight: bold;
+      color: #5b5247;
+    }
+    button {
+      background-color: #a68a64;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #8b7357;
+    }
+    #loading {
+      display: none;
+      text-align: center;
+      color: #5b5247;
+    }
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!-- index.html --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="th"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;ฟอร์มขอเบิกเงินสดย่อย (Petty Cash) - La canal Café&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Prompt&amp;display=swap" rel="stylesheet" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"&gt;&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-family: 'Prompt', sans-serif;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background-color: #f4f1ee;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display: flex;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>justify-content: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>align-items: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 2rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>min-height: 100vh;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.glass-form {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background: #fffaf5;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 2rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 1rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>box-shadow: 0 8px 16px rgba(153, 129, 112, 0.15);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #3f3b36;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: 100%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width: 600px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>input, select, textarea {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: 100%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 0.8rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 0.5rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom: 1rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 0.5rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 1px solid #ccc;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>label {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight: bold;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #5b5247;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>button {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background-color: #a68a64;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: white;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 0.8rem 1.2rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 0.5rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cursor: pointer;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>button:hover {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background-color: #8b7357;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#loading {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: #5b5247;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;form class="glass-form" id="pettyCashForm"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2&gt;📋 ฟอร์มขอเบิกเงินสดย่อย (Petty Cash) - La canal Café&lt;/h2&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label for="name"&gt;🙋‍♂️ ผู้ขอเบิก&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;select id="name" name="name" required onchange="toggleOtherName()"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option value=""&gt;-- เลือกชื่อ --&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;จิมมี่&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;น้ำหวาน&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;พลอย&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;ฟูจิ&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;ปาร์ตี้&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;แบล็ค&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;ค้ำ&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;ตั้ม&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;option&gt;Other&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/select&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="otherNameDiv" style="display:none;"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;label for="otherName"&gt;📝 กรอกชื่อ&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="otherName" name="otherName" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label for="description"&gt;🧾 รายละเอียดค่าใช้จ่าย&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;textarea id="description" name="description" required&gt;&lt;/textarea&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label for="date"&gt;📅 วันที่ต้องการเบิก&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;input type="date" id="date" name="date" required /&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label for="amount"&gt;💰 จำนวนเงิน (บาท)&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;input type="number" id="amount" name="amount" required /&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label for="slip"&gt;📎 สลิปโอนเงิน (jpg/png, max 5MB)&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;input type="file" id="slip" accept="image/png,image/jpeg" required /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="slipPreview"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label for="receipt"&gt;🧾 บิลใบเสร็จ (jpg/png, max 5MB)&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;input type="file" id="receipt" accept="image/png,image/jpeg" required /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="receiptPreview"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label for="po"&gt;📄 แนบใบสั่งซื้อ (PO) (PDF)&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;input type="file" id="po" accept="application/pdf" required /&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="loading"&gt;🚀 กำลังส่งข้อมูล...&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button type="submit"&gt;📤 ส่งฟอร์ม&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/form&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const form = document.getElementById('pettyCashForm');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>function toggleOtherName() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>document.getElementById('otherNameDiv').style.display =</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById('name').value === 'Other' ? 'block' : 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>function previewImage(inputId, previewDivId) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const file = document.getElementById(inputId).files[0];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (file &amp;&amp; file.size &lt;= 5 * 1024 * 1024) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const reader = new FileReader();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>reader.onload = (e) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>document.getElementById(previewDivId).innerHTML = `&lt;img src=\"${e.target.result}\" style=\"width:100%; margin-bottom: 1rem; border-radius:8px;\" /&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>reader.readAsDataURL(file);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('slip').addEventListener('change', () =&gt; previewImage('slip', 'slipPreview'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('receipt').addEventListener('change', () =&gt; previewImage('receipt', 'receiptPreview'));</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>form.addEventListener('submit', async (e) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>e.preventDefault();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>document.getElementById('loading').style.display = 'block';</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>try {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const name = document.getElementById('name').value === 'Other'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>? document.getElementById('otherName').value</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>: document.getElementById('name').value;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const description = document.getElementById('description').value;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const date = document.getElementById('date').value;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const amount = document.getElementById('amount').value;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const slipFile = document.getElementById('slip').files[0];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const receiptFile = document.getElementById('receipt').files[0];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const poFile = document.getElementById('po').files[0];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const toBase64 = (file) =&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>new Promise((resolve, reject) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const reader = new FileReader();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>reader.onload = () =&gt; resolve(reader.result);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>reader.onerror = (error) =&gt; reject(error);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>reader.readAsDataURL(file);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const payload = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>name,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>description,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>date,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>amount,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>slip: await toBase64(slipFile),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>receipt: await toBase64(receiptFile),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>po: await toBase64(poFile),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const iframe = document.createElement('iframe');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>iframe.style.display = 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.body.appendChild(iframe);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const formElement = document.createElement('form');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>formElement.method = 'POST';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>formElement.action = 'https://script.google.com/macros/s/AKfycbyDf8CM6x9WOHhZwQrYnOxti0vCoryw8wawHQwY1STjRTME2LKEhAJgM4Ecwqu8AiRa_g/exec';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>formElement.target = iframe.name = 'hidden_iframe_' + Date.now();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const input = document.createElement('input');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>input.type = 'hidden';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>input.name = 'payload';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>input.value = JSON.stringify(payload);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>formElement.appendChild(input);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.body.appendChild(formElement);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>formElement.submit();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Swal.fire('สำเร็จ', 'ส่งข้อมูลเรียบร้อยแล้ว', 'success');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>form.reset();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById('slipPreview').innerHTML = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById('receiptPreview').innerHTML = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>} catch (err) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>console.error(err);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการส่งข้อมูล', 'error');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>} finally {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.getElementById('loading').style.display = 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+  <form class="glass-form" id="pettyCashForm">
+    <h2>📋 แบบฟอร์มขอเบิกเงินสดย่อย (Petty Cash) - La canal Café</h2>
+
+    <label for="name">🙋‍♂️ชื่อผู้ขอเบิก</label>
+    <select id="name" name="name" required>
+      <option value="">-- เลือกชื่อ --</option>
+      <option>จิมมี่</option>
+      <option>น้ำหวาน</option>
+      <option>พลอย</option>
+      <option>ฟูจิ</option>
+      <option>ปาร์ตี้</option>
+      <option>ค้ำ</option>
+      <option>แบล็ค</option>
+      <option>อินตรา</option>
+      <option>ตั้ม</option>
+    </select>
+
+    <label for="description">🧾 รายละเอียดค่าใช้จ่าย</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <label for="date">📅 วันที่ต้องการเบิก</label>
+    <input type="date" id="date" name="date" required />
+
+    <label for="amount">💰 จำนวนเงิน (บาท)</label>
+    <input type="number" id="amount" name="amount" required />
+
+    <label for="slip">📎 สลิปโอนเงิน (jpg/png, max 5MB)</label>
+    <input type="file" id="slip" accept="image/png,image/jpeg" required />
+    <div id="slipPreview"></div>
+
+    <label for="receipt">🧾 บิลใบเสร็จ (jpg/png, max 5MB)</label>
+    <input type="file" id="receipt" accept="image/png,image/jpeg" required />
+    <div id="receiptPreview"></div>
+
+    <label for="po">📄 แนบใบสั่งซื้อ (PO) (PDF)</label>
+    <input type="file" id="po" accept="application/pdf" required />
+
+    <div id="loading">🚀 กำลังส่งข้อมูล...</div>
+    <button type="submit">📤 ส่งฟอร์ม</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('pettyCashForm');
+    const endpoint = 'https://script.google.com/macros/s/AKfycbyWRC8IWymAE8bF3oyFt_XhTOszduVTr5P7irilDxuVHDDHI63m-btqb6aHOiddR0Ji/exec';
+
+    function previewImage(inputId, previewDivId) {
+      const file = document.getElementById(inputId).files[0];
+      if (file && file.size <= 5 * 1024 * 1024) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById(previewDivId).innerHTML = `<img src="${e.target.result}" style="width:100%; margin-bottom: 1rem; border-radius:8px;" />`;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    document.getElementById('slip').addEventListener('change', () => previewImage('slip', 'slipPreview'));
+    document.getElementById('receipt').addEventListener('change', () => previewImage('receipt', 'receiptPreview'));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      document.getElementById('loading').style.display = 'block';
+
+      try {
+        const toBase64 = (file) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+          });
+
+        const payload = {
+          name: document.getElementById('name').value,
+          description: document.getElementById('description').value,
+          date: document.getElementById('date').value,
+          amount: document.getElementById('amount').value,
+          slip: await toBase64(document.getElementById('slip').files[0]),
+          receipt: await toBase64(document.getElementById('receipt').files[0]),
+          po: await toBase64(document.getElementById('po').files[0])
+        };
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+
+        if (result.status === 'success') {
+          Swal.fire('สำเร็จ', 'ส่งข้อมูลเรียบร้อยแล้ว', 'success');
+          form.reset();
+          document.getElementById('slipPreview').innerHTML = '';
+          document.getElementById('receiptPreview').innerHTML = '';
+        } else {
+          throw new Error(result.message);
+        }
+      } catch (err) {
+        Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการส่งข้อมูล', 'error');
+        console.error(err);
+      } finally {
+        document.getElementById('loading').style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
