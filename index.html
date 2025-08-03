@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Upload to Google Sheets</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 1rem; }
+    input, textarea, button { display: block; width: 100%; margin: 10px 0; padding: 10px; }
+    .success, .error { display: none; padding: 10px; margin-top: 10px; }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h2>แบบฟอร์มส่งข้อมูล</h2>
+  <input type="text" id="name" placeholder="ชื่อผู้ส่ง" required />
+  <input type="text" id="description" placeholder="รายละเอียด" required />
+  <input type="date" id="date" required />
+  <input type="number" id="amount" placeholder="จำนวนเงิน" required />
+  <label>สลิปโอนเงิน (JPG): <input type="file" id="slip" accept="image/jpeg" /></label>
+  <label>ใบเสร็จรับเงิน (JPG): <input type="file" id="receipt" accept="image/jpeg" /></label>
+  <label>ใบสั่งซื้อ (PO) (PDF): <input type="file" id="po" accept="application/pdf" /></label>
+  <button onclick="submitForm()">ส่งข้อมูล</button>
+  <div class="success" id="success">✅ ส่งข้อมูลสำเร็จ</div>
+  <div class="error" id="error">❌ เกิดข้อผิดพลาดในการส่งข้อมูล</div>
+
+  <script>
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    async function submitForm() {
+      const name = document.getElementById("name").value;
+      const description = document.getElementById("description").value;
+      const date = document.getElementById("date").value;
+      const amount = document.getElementById("amount").value;
+      const slipFile = document.getElementById("slip").files[0];
+      const receiptFile = document.getElementById("receipt").files[0];
+      const poFile = document.getElementById("po").files[0];
+
+      const slip = slipFile ? await toBase64(slipFile) : "";
+      const receipt = receiptFile ? await toBase64(receiptFile) : "";
+      const po = poFile ? await toBase64(poFile) : "";
+
+      const payload = {
+        name, description, date, amount, slip, receipt, po
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbyWRC8IWymAE8bF3oyFt_XhTOszduVTr5P7irilDxuVHDDHI63m-btqb6aHOiddR0Ji/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "success") {
+          document.getElementById("success").style.display = "block";
+          document.getElementById("error").style.display = "none";
+        } else {
+          throw new Error(data.message || "Unknown error");
+        }
+      })
+      .catch(err => {
+        document.getElementById("success").style.display = "none";
+        document.getElementById("error").style.display = "block";
+        console.error(err);
+      });
+    }
+  </script>
+</body>
+</html>
